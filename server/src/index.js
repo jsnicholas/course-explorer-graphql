@@ -6,43 +6,10 @@ const typeDefs = require("./schema");
 const resolvers = require("./resolvers")
 const TrackAPI = require("./datasources/track-api");
 
-// import mock data libraries for testing server queries
-// const { addMocksToSchema } = require("@graphql-tools/mock");
-// const { makeExecutableSchema } = require("@graphql-tools/schema");
-
-// Uncomment mocks object to enable mock testing
-// const mocks = {
-//     Query: () => ({
-//         // generate 6 mock entries for testing
-//         tracksForHome: () => [...new Array(6)],
-//     }),
-//     // populate Track fields corresponding to fields defined in  Track typeDefs
-//     Track: () => ({
-//         id: () => "track_01",
-//         title: () => "Astro Kitty, Space Explorer",
-//         // populate author fields corresponding to fields in author typeDefs
-//         author: () => {
-//             return {
-//                 name: "KittyGirl",
-//                 photo: "https://picsum.photos/200",
-//             };
-//         },
-//         thumbnail: () => "https://picsum.photos/200",
-//         length: () => 1210,
-//         modulesCount: () => 6,
-//     }),
-// };
-
-const typeDefs = require("./schema");
-
 async function startApolloServer() {
     // Generate executable schema from typedefs
     const server = new ApolloServer({
         typeDefs, resolvers
-        // uncomment schema for mock testing
-        // schema: addMocksToSchema({
-        //     schema: makeExecutableSchema({ typeDefs }),
-        //     mocks,
     });
     const { url } = await startStandaloneServer(server, {
         context: async () => {
