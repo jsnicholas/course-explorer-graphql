@@ -33,7 +33,7 @@ id: ID!
 "Title of module"
 title: String!
 "The module's length in minutes"
-length: int
+length: Int
 }
 
 "Author is who created the Track"
