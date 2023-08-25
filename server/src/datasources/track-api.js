@@ -18,6 +18,12 @@ class TrackAPI extends RESTDataSource {
         return this.get(`track/${trackId}/modules`)
     }
 
+    // increment track views
+    // makes an HTTP patch req to spacecat API
+    incrementTrackViews(trackId) {
+        return this.patch(`track/${trackId}/numberOfViews`)
+    }
+
 }
 
 module.exports = TrackAPI;

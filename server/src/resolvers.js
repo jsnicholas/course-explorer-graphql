@@ -10,6 +10,32 @@ const resolvers = {
             return dataSources.trackAPI.getTrack(id)
         }
     },
+    Mutation: {
+        // increment a track's numberOfViews property
+        incrementTrackViews: async (_, { id }, { dataSources }) => {
+            // schema expects code, success, and message fields, so we can't immediately return results
+            // use async try catch block
+            try {
+                const track = await dataSources.trackAPI.incrementTrackViews(id);
+
+                return {
+                    code: 200,
+                    success: true,
+                    message: `Successfully incremented numberOfViews for track ${id}`,
+                    track
+                }
+            } catch (err) {
+                return {
+                    // use apolloserver's extension field to provide error info
+                    code: err.extensions.response.status,
+                    success: false,
+                    message: err.extensions.response.body,
+                    track: null,
+                }
+            }
+        }
+    },
+
     Track: {
         author: ({ authorId }, _args, { dataSources }) => {
             return dataSources.trackAPI.getAuthor(authorId)

@@ -6,6 +6,23 @@ type Query {
 tracksForHome: [Track!]!
 track(id:ID!): Track
 }
+
+"mutation to increment track views"
+type Mutation {
+incrementTrackViews(id:ID!): IncrementTrackViewsResponse!
+}
+
+type IncrementTrackViewsResponse {
+"code returns status of mutation"
+code: Int!
+"success indicates if mutation was successful"
+success: Boolean!
+"human-readable message for the UI"
+message: String!
+"return newly updated track after successful mutation"
+track: Track
+}
+
 "A track is a group of modules that teaches about a specific topic"
 type Track {
 id: ID!
